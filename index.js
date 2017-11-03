@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 
 let token = "EAAQRNZBHHfokBAFvGibreVIyZA1vQl279t01F4IsIAZBTDTSiPrZCt11p2Vc9jFrVyVYJpcLrx2EsIViBhMQ4zFjPnuCQFtQJiJ6Wvlq28w3QVOmzHiUKMuziBugOgzFGsBfwx7YiPVBg6cZBEeWZAHwe1UDQjcnyG6FiaPfAl3wZDZD"
 
-// Facebook 
+// Facebook
 
 app.get('/webhook/', function(req, res) {
 	if (req.query['hub.verify_token'] === "blondiebytes") {
@@ -37,19 +37,101 @@ app.post('/webhook/', function(req, res) {
 		if (event.message && event.message.text) {
 			let text = event.message.text
 
-			if (text.includes("Hello"))
-			sendText(sender, "Hello! Welcome to DiamondsBot!")
-		    if (text.includes("Hey"))
-			sendText(sender, "Hello! Welcome to DiamondsBot!")
-		    if (text.includes("Sup"))
-			sendText(sender, "Hello! Welcome to DiamondsBot!")
+			decideMessage(sender, text)
+		}
+		if (event.postback) {
+			let text = JSON.stringify(event.postback)
+			decideMessage(sender, text)
+			continue
 		}
 	}
 	res.sendStatus(200)
 })
+function decideMessage(sender, text1) {
+	let text = text1.toLowerCase()
+	if (text.includes("summer")) {
+		sendImageMessage(sender)
+	} else if (text.includes("winter")) {
+			sendGenericMessage(sender)
+	} else {
+		sendText(sender, "I like Fall")
+		sendButtonMessage(sender, "What is your favourite season?")
+	}
+}
 
 function sendText(sender, text) {
 	let messageData = {text: text}
+	sendRequest(sender, messageData)
+}
+
+function sendButtonMessage(sender, text) {
+	let messageData = {
+		"message":{
+	"attachment":{
+		"type":"template",
+		"payload":{
+			"template_type":"button",
+			"text": text,
+			"buttons":[
+				{
+					"type":"postback",
+					"title":"Summer",
+					"payload":"summer"
+				},
+				{
+					"type":"postback",
+					"title":"Winter",
+					"payload":"winter"
+
+				}
+				},
+			]
+		}
+	}
+	sendRequest(sender, messageData)
+}
+
+function sendImageMessage(sender, text) {
+	let messageData = {
+    "attachment":{
+      "type":"image",
+      "payload":{
+        "url":"http://mefeater.com/wp-content/uploads/2015/06/summer.jpg",
+        "is_reusable":true
+      }
+    }
+	}
+	sendRequest(sender, messageData)
+}
+
+function sendGenericMessage(sender) {
+	let messageData = {"attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Winter!",
+						"imageURL": "http://images6.fanpop.com/image/photos/36200000/snow-image-snow-36241624-1600-1200.png",
+						"subtitle":"I love Winter!",
+						"buttons":[
+              {
+                "type":"web_url",
+                "url":"https://en.wikipedia.org/wiki/Winter",
+                "title":"More about Winter"
+              },
+            ]
+          }
+        ]
+      }
+    }
+	}
+	}
+	sendRequest(sender, messageData)
+}
+
+//request to Facebook
+function sendRequest(sender, messageData){
 	request({
 		url: "https://graph.facebook.com/v2.6/me/messages",
 		qs : {access_token: token},
@@ -70,6 +152,3 @@ function sendText(sender, text) {
 app.listen(app.get('port'), function() {
 	console.log("running: port")
 })
-
-
-
