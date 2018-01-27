@@ -117,7 +117,7 @@ function processMessage(event) {
 //get started button
 { 
   "get_started":{
-    "payload":"<GET_STARTED_PAYLOAD>"
+    "payload":"Greeting"
   }
 }
 
