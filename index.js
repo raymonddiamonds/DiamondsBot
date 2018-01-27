@@ -114,6 +114,12 @@ function processMessage(event) {
         }
     }
 }
+//get started button
+{ 
+  "get_started":{
+    "payload":"<GET_STARTED_PAYLOAD>"
+  }
+}
 
 function findMovie(userId, movieTitle) {
     request("http://www.omdbapi.com/?type=movie&t=" + movieTitle, function (error, response, body) {
