@@ -52,7 +52,7 @@ function processPostback(event) {
     var senderId = event.sender.id;
     var payload = event.postback.payload;
 
-    if (payload === "Greeting") {
+    if (payload === "Get Started") {
         // Get user's first name from the User Profile API
         // and include it in the greeting
         request({
