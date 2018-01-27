@@ -12,5 +12,13 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "request": "^2.81.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raymonddiamonds/DiamondsBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raymonddiamonds/DiamondsBot/issues"
+  },
+  "homepage": "https://github.com/raymonddiamonds/DiamondsBot#readme"
 }
