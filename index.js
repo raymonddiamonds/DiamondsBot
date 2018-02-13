@@ -51,7 +51,7 @@ function sendMessage(event) {
   let text = event.message.text;
 
   request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
+    url: 'https://graph.facebook.com/v2.6/" + sender',
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
     method: 'POST',
     json: {
