@@ -32,9 +32,9 @@ app.get('/webhook', (req, res) => {
 });
 
 /* Handling all messenges */
-app.post('/webhook', (req, res) => {
+app.post("/webhook", (req, res) => {
   console.log(req.body);
-  if (req.body.object === 'page') {
+  if (req.body.object === "page") {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
         if (event.message && event.message.text) {
@@ -64,8 +64,9 @@ function sendMessage(event) {
     } else if (response.body.error) {
         console.log('Error: ', response.body.error);
     }
-    sendMessage(sender, {text: "hello"});
+    
   });
+  sendMessage(sender, {text: "hello"});
 }
 
 // function processPostback(event) {
