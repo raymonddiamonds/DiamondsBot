@@ -64,6 +64,7 @@ function sendMessage(event) {
     } else if (response.body.error) {
         console.log('Error: ', response.body.error);
     }
+    sendMessage("hello");
   });
 }
 
