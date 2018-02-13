@@ -22,35 +22,28 @@ app.get("/", function (req, res) {
 
 // Facebook Webhook
 // Used for verification
-app.get("/webhook", function (req, res) {
-    if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
-        console.log("Verified webhook");
-        res.status(200).send(req.query["hub.challenge"]);
-    } else {
-        console.error("Verification failed. The tokens do not match.");
-        res.sendStatus(403);
-    }
+/* For Facebook Validation */
+app.get('/webhook', (req, res) => {
+  if (req.query['hub.mode'] && req.query['hub.verify_token'] === process.env.VERFICATION_TOKEN) {
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    res.status(403).end();
+  }
 });
 
-// All callbacks for Messenger will be POST-ed here
-app.post("/webhook", function (req, res) {
-    // Make sure this is a page subscription
-    if (req.body.object == "page") {
-        // Iterate over each entry
-        // There may be multiple entries if batched
-        req.body.entry.forEach(function(entry) {
-            // Iterate over each messaging event
-            entry.messaging.forEach(function(event) {
-                if (event.postback) {
-                    processPostback(event);
-                } else if (event.message) {
-                    processMessage(event);
-                }
-            });
-        });
-
-        res.sendStatus(200);
-    }
+/* Handling all messenges */
+app.post('/webhook', (req, res) => {
+  console.log(req.body);
+  if (req.body.object === 'page') {
+    req.body.entry.forEach((entry) => {
+      entry.messaging.forEach((event) => {
+        if (event.message && event.message.text) {
+          sendMessage(event);
+        }
+      });
+    });
+    res.status(200).end();
+  }
 });
 
 function sendMessage(event) {
