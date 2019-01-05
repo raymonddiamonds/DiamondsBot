@@ -2,6 +2,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var icons = require("./icons");
 
 var db = mongoose.connect(process.env.MONGODB_URI);
 
@@ -51,10 +52,6 @@ app.post("/webhook", function (req, res) {
     }
 });
 
-function processPostback(event) {
-
-}
-
 function processMessage(event) {
     if (!event.message.is_echo) {
         var message = event.message;
@@ -81,10 +78,12 @@ function processMessage(event) {
                         quick_replies: [{
                             "content_type":"text",
                             "title":"Find Weather Into",
+                            "image_url": icons.sun,
                             "payload":"weather"
                           }, {
                             "content_type": "text",
                             "title": "Find Flight Info",
+                            "image_url": icons.airplane,
                             "payload": "flight"
                           }
                         ]
