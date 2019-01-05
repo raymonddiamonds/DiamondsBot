@@ -14,7 +14,7 @@ app.listen((process.env.PORT || 5000));
 // Server index page
 app.get("/", function (req, res) {
     console.log('hello world 2019')
-    res.send("Deployed! 2019 works!");
+    res.send("Deployed! 2019 works! 1");
 });
 
 // Facebook Webhook
@@ -169,7 +169,7 @@ function findMovie(userId, movieTitle) {
                 sendMessage(userId, {text: movieObj.Error});
             }
         } else {
-            sendMessage(userId, {text: userID});
+            sendMessage(userId, {text: "Something went wrong. Try again. (findMovie)"});
         }
     });
 }
