@@ -13,6 +13,7 @@ app.listen((process.env.PORT || 5000));
 
 // Server index page
 app.get("/", function (req, res) {
+    console.log('hello world 2019')
     res.send("Deployed!");
 });
 
