@@ -77,8 +77,8 @@ function processMessage(event) {
                 case "ni hao":
                     sendMessage(userId, {text: "Heya! Welcome to RayBot" });
                     sendMessage(userId, {
-                        text: "How can I help you?" 
-                        "quick_replies":[
+                        text: "How can I help you?", 
+                        quick_replies:[
                           {
                             "content_type":"text",
                             "title":"Find Weather Into",
