@@ -78,18 +78,17 @@ function processMessage(event) {
                     sendMessage(senderId, {text: "Heya! Welcome to RayBot" });
                     sendMessage(senderId, {
                         text: "How can I help you?", 
-                        quick_replies:[
-                          {
+                        quick_replies: [{
                             "content_type":"text",
                             "title":"Find Weather Into",
-                            "payload":"<POSTBACK_PAYLOAD>"
-                          },
-                          {
+                            "payload":"weather"
+                          }, {
                             "content_type": "text",
-                            "title": "Find Flight Info"
+                            "title": "Find Flight Info",
+                            "payload": "flight"
                           }
                         ]
-                      });
+                      })
                     break;
 
                 default:
