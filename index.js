@@ -169,7 +169,7 @@ function getMovieDetail(userId, field) {
 
 // sends message to user
 function sendMessage(recipientId, message) {
-    if(message == "How can I help you?")
+
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
