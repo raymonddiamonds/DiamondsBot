@@ -78,12 +78,12 @@ function processMessage(event) {
                         quick_replies: [{
                             "content_type":"text",
                             "title":"Find Weather Into",
-                            "image_url": "./icons/sun.png",
+                            "image_url": "icons/sun.png",
                             "payload":"weather"
                           }, {
                             "content_type": "text",
                             "title": "Find Flight Info",
-                            "image_url": "./icons/airplane.png",
+                            "image_url": "icons/airplane.png",
                             "payload": "flight"
                           }
                         ]
