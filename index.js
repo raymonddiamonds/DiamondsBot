@@ -14,7 +14,7 @@ app.listen((process.env.PORT || 5000));
 // Server index page
 app.get("/", function (req, res) {
     console.log('hello world 2019')
-    res.send("Deployed! 2019 works! 1");
+    res.send("Deployed! 2019 works! 2");
 });
 
 // Facebook Webhook
@@ -75,7 +75,7 @@ function processMessage(event) {
                 case "hi":
                 case "hello":
                 case "ni hao":
-                    sendMessage(userId, {text: "Heya! Welcome to RayBot" });
+                    sendMessage(senderId, {text: "Heya! Welcome to RayBot" });
                     // sendMessage(userId, {
                     //     text: "How can I help you?", 
                     //     quick_replies:[
