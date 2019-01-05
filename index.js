@@ -76,19 +76,20 @@ function processMessage(event) {
                 case "hello":
                 case "ni hao":
                     sendMessage(senderId, {text: "Heya! Welcome to RayBot" });
-                    // sendMessage(userId, {
-                    //     text: "How can I help you?", 
-                    //     quick_replies:[
-                    //       {
-                    //         "content_type":"text",
-                    //         "title":"Find Weather Into",
-                    //         "payload":"<POSTBACK_PAYLOAD>"
-                    //       },
-                    //       {
-                    //         "content_type": "text",
-                    //         "title": "Find Flight Info"
-                    //       }
-                    //   });
+                    sendMessage(senderId, {
+                        text: "How can I help you?", 
+                        quick_replies:[
+                          {
+                            "content_type":"text",
+                            "title":"Find Weather Into",
+                            "payload":"<POSTBACK_PAYLOAD>"
+                          },
+                          {
+                            "content_type": "text",
+                            "title": "Find Flight Info"
+                          }
+                        ]
+                      });
                     break;
 
                 default:
