@@ -2,7 +2,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var icons = require("./icons");
+
 
 var db = mongoose.connect(process.env.MONGODB_URI);
 
@@ -78,12 +78,12 @@ function processMessage(event) {
                         quick_replies: [{
                             "content_type":"text",
                             "title":"Find Weather Into",
-                            "image_url": icons.sun,
+                            "image_url": "./icons/sun.png",
                             "payload":"weather"
                           }, {
                             "content_type": "text",
                             "title": "Find Flight Info",
-                            "image_url": icons.airplane,
+                            "image_url": "./icons/airplane.png",
                             "payload": "flight"
                           }
                         ]
