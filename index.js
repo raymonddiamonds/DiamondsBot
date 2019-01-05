@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
 var db = mongoose.connect(process.env.MONGODB_URI);
-var Movie = require("./models/movie");
+
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -14,7 +14,7 @@ app.listen((process.env.PORT || 5000));
 // Server index page
 app.get("/", function (req, res) {
     console.log('hello world 2019')
-    res.send("Deployed!");
+    res.send("Deployed! 2019 works!");
 });
 
 // Facebook Webhook
@@ -169,7 +169,7 @@ function findMovie(userId, movieTitle) {
                 sendMessage(userId, {text: movieObj.Error});
             }
         } else {
-            sendMessage(userId, {text: "Something went wrong. Try again."});
+            sendMessage(userId, {text: "Something went wrong. Try again. (findMovie)"});
         }
     });
 }
@@ -177,7 +177,7 @@ function findMovie(userId, movieTitle) {
 function getMovieDetail(userId, field) {
     Movie.findOne({user_id: userId}, function(err, movie) {
         if(err) {
-            sendMessage(userId, {text: "Something went wrong. Try again"});
+            sendMessage(userId, {text: "Something went wrong. Try again (movie details)"});
         } else {
             sendMessage(userId, {text: movie[field]});
         }
