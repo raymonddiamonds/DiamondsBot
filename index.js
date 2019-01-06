@@ -78,18 +78,20 @@ function processMessage(event) {
                         text: "How can I help you?", 
                         quick_replies: [{
                             "content_type":"text",
-                            "title":"Find Weather Into",
+                            "title":"Find weather info",
                             "image_url": "https://img.icons8.com/color/48/000000/summer.png",
                             "payload":"weather"
                           }, {
                             "content_type": "text",
-                            "title": "Find Flight Info",
+                            "title": "Find flight info",
                             "image_url": "https://img.icons8.com/color/48/000000/airplane-take-off.png",
                             "payload": "flight"
                           }
                         ]
                       })
                     break;
+                case "Find weather info":
+                    
 
                 default:
                     findMovie(senderId, formattedMsg);
