@@ -8,6 +8,7 @@ var weather = require("./weatherAPI.js");
 
 var db = mongoose.connect(process.env.MONGODB_URI);
 
+var step = 0;
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -71,6 +72,17 @@ function processMessage(event) {
         console.log("Received message from senderId: " + senderId);
         console.log("Message is: " + JSON.stringify(message));
 
+        if(step == 1){
+            if(message.attachments[0].payload.coordinates) {
+                getWeatherCoord(message.attachments[0].payload.coordinates.lat, message.attachments[0].payload.coordinates.long, senderId)
+                //sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
+            } else {
+                getWeatherCity(message.text, senderId) {
+
+                }
+            }
+        }
+
         // You may get a text or attachment but not both
         if (message.text) {
             var formattedMsg = message.text.toLowerCase().trim();
@@ -80,6 +92,7 @@ function processMessage(event) {
             // Otherwise search for new movie.
             switch (formattedMsg) {
                 case "find weather info":
+                    step = 1;
                     sendMessage(senderId, {text: "For which city?",
                         quick_replies: [{  
                             "content_type":"location"
@@ -107,34 +120,45 @@ function processMessage(event) {
                         ]
                       })
                     break;
-              
-
-
 
                 default:
-                    sendMessage(senderId, {text: "Defaul message. Sorry I don't understand. Try again: \n " + formattedMsg})
+                    sendMessage(senderId, {text: "Default message. Sorry I don't understand. Try again: \n " + formattedMsg})
             }
         } else if (message.attachments) {
 
             // If requesting location
-            if(message.attachments[0].payload.coordinates) {
-                getWeather("Montreal", senderId)
-                //sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
+            // if(message.attachments[0].payload.coordinates) {
+            //     getWeather(message.attachments[0].payload.coordinates.lat, message.attachments[0].payload.coordinates.long, senderId)
+            //     //sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
                 
-            }
+            // }
      
         }
     }
 }
 
-function getWeather(city, senderId) {
-    sendMessage(senderId, {text: "hello world temp: " + city})
-    request("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=efc2db82be8a9da5ad11bed26df76480" + "&units=metric", function (error, response, body) {
+function getWeatherCoord(lat, long, senderId) {
+
+    request("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&long=" + long + "&appid=" + process.env.WEATHER_API_ID + "&units=metric", function (error, response, body) {
        
             var weather = JSON.parse(body);
             var temp = parseInt(weather.main.temp)
+            var desc = weather.weather.description
 
-            sendMessage(senderId, {text: "temp is: " + temp})
+            sendMessage(senderId, {text: "The weather is: " + temp + ". " + desc})
+        
+    })
+}
+
+function getWeatherCity(city, senderId) {
+
+    request("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + process.env.WEATHER_API_ID + "&units=metric", function (error, response, body) {
+       
+            var weather = JSON.parse(body);
+            var temp = parseInt(weather.main.temp)
+            var desc = weather.weather.description
+
+            sendMessage(senderId, {text: "The weather is: " + temp +  ". " + desc})
         
     })
 }
