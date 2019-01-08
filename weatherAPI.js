@@ -1,7 +1,7 @@
 var http = require('http')
 
 // Connect to API URL api.openweathermap.org/data/2.5/weather?q={city name}
-module.exports = function accessWeather(city, callback) {
+module.exports.city = function (city, callback) {
 
 	// var options = {
 	// 	host: "api.openweathermap.org",

@@ -119,7 +119,7 @@ function processMessage(event) {
             // If requesting location
             if(message.attachments[0].payload.coordinates) {
                 weather("Montreal", function(temp){
-                    sendMessage(senderId, {text: "weather is: " temp})
+                    sendMessage(senderId, {text: "weather is: " + temp})
                 })
             }
             sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
