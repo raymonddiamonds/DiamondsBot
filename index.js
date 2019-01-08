@@ -107,7 +107,7 @@ function processMessage(event) {
                         ]
                       })
                     break;
-                case ""
+              
 
 
 
