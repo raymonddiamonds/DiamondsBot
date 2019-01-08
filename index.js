@@ -115,7 +115,7 @@ function processMessage(event) {
                     sendMessage(senderId, {text: "Defaul message. Sorry I don't understand. Try again: \n " + formattedMsg})
             }
         } else if (message.attachments) {
-            sendMessage(senderId, {text:"attach: " message.attachments});
+            sendMessage(senderId, {text:"attach: " + message.attachments});
         }
     }
 }
