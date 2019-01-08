@@ -81,6 +81,7 @@ function processMessage(event) {
             switch (formattedMsg) {
                 case "Find weather info":
                     sendMessage(senderId, {text: "For which city?"});
+                    break;
                 case "hey":
                 case "hi":
                 case "hello":
