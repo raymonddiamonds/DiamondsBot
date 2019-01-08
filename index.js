@@ -127,12 +127,13 @@ function processMessage(event) {
 }
 
 function getWeather(city, senderId) {
-    request("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + process.env.WEATHER_API_ID + "&units=metric", function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+    request("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=efc2db82be8a9da5ad11bed26df76480" + "&units=metric", function (error, response, body) {
+       
             var weather = JSON.parse(body);
             var temp = parseInt(weather.main.temp)
+            sendMessage(senderId, "hello world temp")
             sendMessage(senderId, "temp is: " + temp)
-        }
+        
     })
 }
 
