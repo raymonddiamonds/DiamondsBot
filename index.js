@@ -79,7 +79,7 @@ function processMessage(event) {
             // keywords and send back the corresponding movie detail.
             // Otherwise search for new movie.
             switch (formattedMsg) {
-                case "Find weather info":
+                case "find weather info":
                     sendMessage(senderId, {text: "For which city?"});
                     break;
                 case "hey":
