@@ -119,14 +119,21 @@ function processMessage(event) {
             // If requesting location
             if(message.attachments[0].payload.coordinates) {
                 sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
+                getWeather("Montreal", senderId)
             }
      
         }
     }
 }
 
-function getWeather(city) {
-
+function getWeather(city, senderId) {
+    request("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + process.env.WEATHER_API_ID + "&units=metric", function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var weather = JSON.parse(body);
+            var temp = parseInt(weather.main.temp)
+            sendMessage(senderId, "temp is: " + temp)
+        }
+    }
 }
 
 
