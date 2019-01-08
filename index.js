@@ -94,7 +94,7 @@ function processMessage(event) {
 
 
                 default:
-                    sendMessage(senderId, {text: "Sorry I could not understand. Please try again"})
+                    sendMessage(senderId, {text: message})
             }
         } else if (message.attachments) {
             sendMessage(senderId, {text: "Sorry, I don't understand your request. Please try again"});
