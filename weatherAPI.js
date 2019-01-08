@@ -40,7 +40,8 @@ module.exports.city = function (city, callback) {
 
 		var json = JSON.parse(body);
 
-		callback(json.main.temp)
+
+		callback(body)
     
   	});
 }
