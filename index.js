@@ -79,6 +79,8 @@ function processPostback(event) {
       var message = greeting + "My name is SP Movie Bot. I can tell you various details regarding movies. What movie would you like to know about?";
       sendMessage(senderId, {text: message});
     });
+  } else {
+    sendMessage(senderId, {text: "hello world postback!"});
   }
 }
 
