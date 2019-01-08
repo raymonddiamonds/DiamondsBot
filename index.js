@@ -91,10 +91,10 @@ function processMessage(event) {
                       })
                     break;
                 case "Find weather info":
-                    
+
 
                 default:
-                    findMovie(senderId, formattedMsg);
+                    sendMessage(senderId, {text: "Sorry I could not understand. Please try again"})
             }
         } else if (message.attachments) {
             sendMessage(senderId, {text: "Sorry, I don't understand your request. Please try again"});
