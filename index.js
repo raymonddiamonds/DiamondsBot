@@ -43,7 +43,8 @@ app.post("/webhook", function (req, res) {
             entry.messaging.forEach(function(event) {
                
                 if (event.postback) {
-                    processPostback(event);
+                    sendMessage(event.sender.id, "postback received")
+                    // processPostback(event);
                 } else if (event.message) {
                     processMessage(event);
                 }
