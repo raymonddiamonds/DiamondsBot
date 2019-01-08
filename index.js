@@ -115,6 +115,13 @@ function processMessage(event) {
                     sendMessage(senderId, {text: "Defaul message. Sorry I don't understand. Try again: \n " + formattedMsg})
             }
         } else if (message.attachments) {
+
+            // If requesting location
+            if(message.attachments[0].payload.coordinates) {
+                weather("Montreal", function(temp){
+                    sendMessage(senderId, {text: "weather is: " temp})
+                })
+            }
             sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
         }
     }
