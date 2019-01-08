@@ -133,7 +133,7 @@ function getWeather(city, senderId) {
             var temp = parseInt(weather.main.temp)
             sendMessage(senderId, "temp is: " + temp)
         }
-    }
+    })
 }
 
 
