@@ -77,9 +77,9 @@ function processMessage(event) {
                 getWeatherCoord(message.attachments[0].payload.coordinates.lat, message.attachments[0].payload.coordinates.long, senderId)
                 //sendMessage(senderId, {text:"attach: " + message.attachments[0].payload.coordinates.lat});
             } else {
-                getWeatherCity(message.text, senderId) {
+                getWeatherCity(message.text, senderId) 
 
-                }
+                
             }
         }
 
