@@ -80,7 +80,11 @@ function processMessage(event) {
             // Otherwise search for new movie.
             switch (formattedMsg) {
                 case "find weather info":
-                    sendMessage(senderId, {text: "For which city?"});
+                    sendMessage(senderId, {text: "For which city?",
+                        quick_replies: [{  
+                            "content_type":"location"
+                        }]
+                    });
                     break;
                 case "hey":
                 case "hi":
